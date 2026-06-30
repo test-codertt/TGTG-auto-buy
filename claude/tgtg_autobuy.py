@@ -33,8 +33,10 @@ print(f"Watching for bag (item {ITEM_ID})...")
 
 while True:
     try:
-        items = client.get_items(item_ids=[ITEM_ID])
+        items = client.get_items(favorites_only=True)
         for item in items:
+            if item["item"]["item_id"] != ITEM_ID:
+                continue
             available = item["items_available"]
             print(f"[{time.strftime('%H:%M:%S')}] Available: {available}")
 
